@@ -30,7 +30,7 @@ namespace DecimalToRoman
         {
             if ((number % 1) != 0)
             {
-                throw new Exception("El numero debe ser un entero");
+                throw new Exception("El numero debe ser un entero.");
             }
         }
 
