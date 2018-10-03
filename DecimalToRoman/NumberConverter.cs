@@ -1,12 +1,9 @@
 ﻿using System;
 
-// This is a namespace for the class
 namespace DecimalToRoman
 {
-    // This class is an utility for convert numbers from a format to other
     public static class NumberConverter
     {
-        // Maximum decimal number for convert to roman numbers
         private const int MaximumDecimalRomanNumber = 3000;
         private const int MinimumDecimalRomanNumber = 0;
 
@@ -25,7 +22,7 @@ namespace DecimalToRoman
             ValidateNumberIsInteger(number);
             ValidateNumberIsPositive(number);
             ValidateNumberIsLessOrEqualThanMaximum(number);
-            // Todo: a lot of wonderfull things in a near future. Date: 10/12/1988. Miguel Rivera
+
             return IntToRoman(Convert.ToInt32(number));
         }
 
