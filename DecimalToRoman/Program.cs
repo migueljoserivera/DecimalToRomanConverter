@@ -7,8 +7,8 @@ namespace DecimalToRoman
         static void Main(string[] args)
         {
             string inputNumber = RequestDecimalNumber();
-            string romanNumber = GetRomanNumberFromDecimal(inputNumber);
-            WriteAndWait(romanNumber);
+            string conversionResult = GetConversionResult(inputNumber);
+            WriteAndWait(conversionResult);
         }
 
         private static string RequestDecimalNumber()
@@ -17,10 +17,17 @@ namespace DecimalToRoman
             return Console.ReadLine();
         }
 
-        private static string GetRomanNumberFromDecimal(string inputNumber)
+        private static string GetConversionResult(string inputNumber)
         {
-            double decimalNumber = Convert.ToDouble(inputNumber);
-            return NumberConverter.GetRomanNumberFromDecimal(decimalNumber);
+            try
+            {
+                double decimalNumber = Convert.ToDouble(inputNumber);
+                return NumberConverter.GetRomanNumberFromDecimal(decimalNumber);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
         private static void WriteAndWait(string message)
