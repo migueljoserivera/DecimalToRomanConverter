@@ -7,23 +7,34 @@ namespace DecimalToRoman
         private const int MaximumDecimalRomanNumber = 3000;
         private const int MinimumDecimalRomanNumber = 0;
 
-        private static readonly string[] RomanThousands = { "", "M", "MM", "MMM" };
-        private static readonly string[] RomanHundreds = { "", "C", "CC", "CCC", "CD",
+        private static readonly string[] RomanNumberThousands = { "", "M", "MM", "MMM" };
+        private static readonly string[] RomanNumberHundreds = { "", "C", "CC", "CCC", "CD",
                                                             "D", "DC", "DCC", "DCCC", "CM" };
-
-        private static readonly string[] RomanTens = { "", "X", "XX", "XXX", "XL", "L", "LX",
+        private static readonly string[] RomanNumberTens = { "", "X", "XX", "XXX", "XL", "L", "LX",
                                                             "LXX", "LXXX", "XC" };
-
-        private static readonly string[] RomanOnes = { "", "I", "II", "III", "IV", "V", "VI",
+        private static readonly string[] RomanNumberOnes = { "", "I", "II", "III", "IV", "V", "VI",
                                                             "VII", "VIII", "IX" };
 
+        /// <summary>
+        ///     Convert a decimal number in roman number
+        /// </summary>
+        /// <param name="number">Decimal to convert</param>
+        /// <returns>
+        ///     A roman number
+        /// </returns>
+        /// <example>
+        ///     10 converts to X, 125 converts to CXXV
+        /// </example>
+        /// <exception cref="System.Exception">
+        ///     Is not valid
+        /// </exception>
         public static string GetRomanNumberFromDecimal(double number)
         {
             ValidateNumberIsInteger(number);
             ValidateNumberIsPositive(number);
             ValidateNumberIsLessOrEqualThanMaximum(number);
 
-            return IntToRoman(Convert.ToInt32(number));
+            return IntegerToRomanNumber(Convert.ToInt32(number));
         }
 
         private static void ValidateNumberIsInteger(double number)
@@ -46,37 +57,40 @@ namespace DecimalToRoman
         {
             if (number > MaximumDecimalRomanNumber)
             {
-                throw new Exception($"El numero debe ser menor que {MaximumDecimalRomanNumber}");
+                throw new Exception(
+                        $"El numero debe ser menor que {MaximumDecimalRomanNumber}"
+                    );
             }
         }
 
-        private static string IntToRoman(int number)
+        private static string IntegerToRomanNumber(int number)
         {
-            string romanThousands = GetRomanThousands(number);
-            string romanHundreds = GetRomanHundreds(number);
-            string romanTens = GetRomanTens(number);
-            string romanOnes = GetRomanOnes(number);
-            return romanThousands + romanHundreds + romanTens + romanOnes;
+            string romanNumberThousands = GetRomanNumberThousands(number);
+            string romanNumberHundreds = GetRomanNumberHundreds(number);
+            string romanNumberTens = GetRomanNumberTens(number);
+            string romanNumberOnes = GetRomanNumberOnes(number);
+
+            return romanNumberThousands + romanNumberHundreds + romanNumberTens + romanNumberOnes;
         }
 
-        private static string GetRomanThousands(int number)
+        private static string GetRomanNumberThousands(int number)
         {
-            return RomanThousands[GetIndexForNumber(number, 1000)];
+            return RomanNumberThousands[GetIndexForNumber(number, 1000)];
         }
 
-        private static string GetRomanHundreds(int number)
+        private static string GetRomanNumberHundreds(int number)
         {
-            return RomanHundreds[GetIndexForNumber(number, 100)];
+            return RomanNumberHundreds[GetIndexForNumber(number, 100)];
         }
 
-        private static string GetRomanTens(int number)
+        private static string GetRomanNumberTens(int number)
         {
-            return RomanTens[GetIndexForNumber(number, 10)];
+            return RomanNumberTens[GetIndexForNumber(number, 10)];
         }
 
-        private static string GetRomanOnes(int number)
+        private static string GetRomanNumberOnes(int number)
         {
-            return RomanOnes[GetIndexForNumber(number, 1)];
+            return RomanNumberOnes[GetIndexForNumber(number, 1)];
         }
 
         private static int GetIndexForNumber(int number, int factor)
